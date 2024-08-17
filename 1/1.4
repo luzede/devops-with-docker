@@ -1,0 +1,17 @@
+$ docker run -d -it --name one4 ubuntu sh -c 'while true; do echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website; done'
+f4e3ce714442bdee52054bb529ff9bfc01a7d1492906b3e82525b0f1e187141d
+$ docker exec -it one4 bash
+root@f4e3ce714442:/# apt-get update
+root@f4e3ce714442:/# apt-get -y install curl
+root@f4e3ce714442:/# exit
+$ docker attach one4
+helsinki.fi
+Searching..
+<html>
+<head><title>301 Moved Permanently</title></head>
+<body>
+<center><h1>301 Moved Permanently</h1></center>
+<hr><center>nginx/1.22.1</center>
+</body>
+</html>
+Input website:
