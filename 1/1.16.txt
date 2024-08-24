@@ -1,0 +1,6 @@
+I took the coursepage image specified in the exercise and hosted as a web service on render.com
+
+https://coursepage-e1gz.onrender.com/
+
+It is a free instance so if you visit, it takes around 50
+seconds to spin up from inactivity

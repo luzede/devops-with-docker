@@ -1,0 +1,3 @@
+https://hub.docker.com/layers/triflecityjailer/dwd/express-rest-base/images/sha256-6d3147e37a3cdd629e5e0bfdd7034d15670eed5f946fc5e2364f00938e90c578
+
+https://github.com/luzede/express-rest-base
