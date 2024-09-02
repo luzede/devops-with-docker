@@ -1,0 +1,6 @@
+Just like we did in the development section of the docker course,
+I did the same thing for some of my projects and made them run inside
+a container. Created a volume for node_modules and binded the source code
+to the container.
+
+Also used to create databases for testing

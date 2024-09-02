@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+    example-frontend:
+        image: example-frontend
+        container_name: front
+        ports:
+            - 127.0.0.1:5000:5000
+        
+    example-backend:
+        image: example-backend
+        container_name: back
+        ports:
+            - 127.0.0.1:8080:8080
+        depends_on:
+            - redis
+            - postgres
+        environment:
+            REDIS_HOST: redis
+            POSTGRES_HOST: postgres
+            
+        
+    redis:
+        image: redis:alpine
+        restart: unless-stopped
+        command: ["redis-server", "--loglevel", "warning"]
+        
+    postgres:
+        container_name: postgres
+        image: postgres:13.2-alpine
+        environment:
+            POSTGRES_PASSWORD: postgres
+        restart: unless-stopped
+        volumes:
+            - type: bind
+              source: ./database
+              target: /var/lib/postgresql/data

@@ -1,0 +1,10 @@
+I changed the Dockerfile of the frontend
+to run the build with REACT_APP_BACKEND_URL
+of http://localhost:80/api
+
+Then I rerun the build with
+docker build . tag-- example-frontend
+
+and after that
+docker compose up
+made all the buttons work

@@ -1,0 +1,22 @@
+
+services:
+    example-frontend:
+        image: example-frontend
+        container_name: front
+        ports:
+            - 127.0.0.1:5000:5000
+        
+    example-backend:
+        image: example-backend
+        container_name: back
+        ports:
+            - 127.0.0.1:8080:8080
+        depends_on:
+            - redis
+        environment:
+            REDIS_HOST: redis
+        
+    redis:
+        image: redis:alpine
+        restart: unless-stopped
+        command: ["redis-server", "--loglevel", "warning"]

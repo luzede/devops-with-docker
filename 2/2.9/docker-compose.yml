@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+    example-frontend:
+        image: example-frontend
+        container_name: front
+
+    example-backend:
+        image: example-backend
+        container_name: back
+        depends_on:
+            - redis
+            - postgres
+        environment:
+            REDIS_HOST: redis
+            POSTGRES_HOST: postgres
+            REQUEST_ORIGIN: http://localhost:80
+ 
+    redis:
+        image: redis:alpine
+        restart: unless-stopped
+        command: ["redis-server", "--loglevel", "warning"]
+
+        
+    postgres:
+        container_name: postgres
+        image: postgres:13.2-alpine
+        environment:
+            POSTGRES_PASSWORD: postgres
+        restart: unless-stopped
+        volumes:
+            - type: bind
+              source: ./database
+              target: /var/lib/postgresql/data
+
+              
+    reverse-proxy:
+        container_name: reverse-proxy
+        image: nginx:1.27-alpine
+        ports:
+            - 127.0.0.1:80:80
+        volumes:
+            - type: bind
+              source: ./nginx.conf
+              target: /etc/nginx/nginx.conf
+              read_only: true
+        depends_on:
+            - example-backend
+            - example-frontend
